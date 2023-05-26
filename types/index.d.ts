@@ -6,12 +6,8 @@ export type MainNavItem = {
   disabled?: boolean
 }
 
-export type SiteRoutesType = {
-  title: string
-  description?: string
-  disabled?: boolean
-  external?: boolean
-  icon?: keyof typeof Icons
+type urlPathType = {
+  typeUrl: 'dashboard' | 'register' | 'query'
 } & (
   | {
       href: string
@@ -23,18 +19,18 @@ export type SiteRoutesType = {
     }
 )
 
+export type SiteRoutesType = {
+  title: string
+  description: string
+  urlPath: urlPathType
+  disabled?: boolean
+  external?: boolean
+  icon?: keyof typeof Icons
+}
+
 export type SiteConfigType = {
   name: string
   description: string
   mainNav: MainNavItem[]
-  routeConfig: {
-    pagesDashboard: SiteRoutesType[]
-    pagesRegister: SiteRoutesType[]
-    pagesQuery: SiteRoutesType[]
-  }
-}
-
-export type DashboardConfig = {
-  mainNav: MainNavItem[]
-  sidebarNav: SiteRoutesType[]
+  routeConfig: SiteRoutesType[]
 }

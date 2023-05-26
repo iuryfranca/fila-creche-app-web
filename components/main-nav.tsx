@@ -1,39 +1,56 @@
+'use client'
+
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+import * as React from 'react'
 
 import { siteConfig } from '@/config/site'
-import { NavItem } from '@/types/nav'
+import { fontMono } from '@/lib/fonts'
+import { cn } from '@/lib/utils'
+import { Icons } from './icons'
 
-interface MainNavProps {
-  items?: NavItem[]
-}
+const DashboardNav = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>(({ className, ...props }, ref) => {
+  const path = usePathname()
 
-export function MainNav({ items }: MainNavProps) {
   return (
-    <div className="flex gap-6 md:gap-10">
-      <Link href="/" className="hidden items-center space-x-2 md:flex">
-        <span className="hidden font-bold sm:inline-block">
-          {siteConfig.name}
-        </span>
+    <div
+      className={cn('flex h-full w-full flex-col gap-5', className, fontMono)}
+      ref={ref}
+      {...props}
+    >
+      <Link href="/dashboard">
+        <h1 className="font-bold text-primary-foreground">{siteConfig.name}</h1>
       </Link>
-      {/* {items?.length ? (
-        <nav className="hidden gap-6 md:flex">
-          {items?.map(
-            (item, index) =>
-              item.href && (
-                <Link
-                  key={index}
-                  href={item.href}
+      <nav className="grid grid-rows-[50px] items-start gap-2">
+        {siteConfig.routeConfig.map((item, index) => {
+          const Icon = Icons[item.icon || 'arrowRight']
+          return (
+            item.urlPath.href && (
+              <Link key={index} href={item.disabled ? '/' : item.urlPath.href}>
+                <span
                   className={cn(
-                    'flex items-center text-lg font-semibold text-muted-foreground sm:text-sm',
+                    'group flex items-center rounded-md px-3 py-2 text-sm font-medium text-primary-foreground transition duration-300 hover:bg-secondary hover:text-secondary-foreground',
+                    path === item.urlPath.href
+                      ? 'bg-secondary text-secondary-foreground'
+                      : 'bg-transparent',
                     item.disabled && 'cursor-not-allowed opacity-80'
                   )}
                 >
-                  {item.title}
-                </Link>
-              )
-          )}
-        </nav>
-      ) : null} */}
+                  <Icon className="mr-2 h-4 w-4" />
+                  <span>{item.title}</span>
+                </span>
+              </Link>
+            )
+          )
+        })}
+      </nav>
     </div>
   )
-}
+})
+
+DashboardNav.displayName = 'DashboardNav'
+
+export { DashboardNav }
