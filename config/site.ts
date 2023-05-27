@@ -79,7 +79,7 @@ export const siteConfig: SiteConfigType = {
         'Alguma descrição qualquer aqui, somente teste, nada mais do que teste 😁',
       urlPath: {
         typeUrl: 'query',
-        href: '/dashboard/consultas/secretaria',
+        href: '/dashboard/consulta/secretaria',
       },
       icon: 'layoutTemplate',
     },
@@ -89,7 +89,7 @@ export const siteConfig: SiteConfigType = {
         'Alguma descrição qualquer aqui, somente teste, nada mais do que teste 😁',
       urlPath: {
         typeUrl: 'query',
-        href: '/dashboard/consultas/creches',
+        href: '/dashboard/consulta/creches',
       },
       icon: 'layoutTemplate',
     },
@@ -99,7 +99,7 @@ export const siteConfig: SiteConfigType = {
         'Alguma descrição qualquer aqui, somente teste, nada mais do que teste 😁',
       urlPath: {
         typeUrl: 'query',
-        href: '/dashboard/consultas/vagas',
+        href: '/dashboard/consulta/vagas',
       },
       icon: 'layoutTemplate',
     },
