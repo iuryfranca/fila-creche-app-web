@@ -129,26 +129,7 @@ const secretariaFormSchema = z.object({
 type SecretariaFormSchemaTypes = z.infer<typeof secretariaFormSchema>
 
 // This can come from your database or API.
-const defaultValues: Partial<SecretariaFormSchemaTypes> = {
-  // cnpj: '',
-  // razaoSocial: '',
-  // nomeFantasia: '',
-  // naturezaJuridica: '',
-  // dataCriacao: new Date('2023-01-23'),
-  // decreto: '',
-  // secretario: '',
-  // vincEnteFederativo: '',
-  // prefeito: '',
-  // endereco: {
-  //   logradouro: '',
-  //   numero: null,
-  //   bairro: '',
-  //   cep: '',
-  //   localizacaoDiferenciada: '',
-  //   zona: '',
-  //   cidade: { id: null },
-  // },
-}
+const defaultValues: Partial<SecretariaFormSchemaTypes> = {}
 
 export function SecretariaForm() {
   const [valueTabs, setValueTabs] = useState('identification')
@@ -246,7 +227,7 @@ export function SecretariaForm() {
                     <div className="flex">
                       <FormLabel>Razão Social *</FormLabel>
                       {TooltipWithLabelForm(
-                        'Escreva o nome da Razão Social. Ex: Secretaria Municipal de Educação Rondônia'
+                        'Informe o nome da razão social. Ex: Secretaria Municipal de Educação Rondônia'
                       )}
                     </div>
                     <FormControl>
@@ -264,7 +245,7 @@ export function SecretariaForm() {
                     <div className="flex">
                       <FormLabel>Nome Fantasia *</FormLabel>
                       {TooltipWithLabelForm(
-                        'Escreva o Nome Fantasia. Ex: Cantinho do Céu'
+                        'Informe o nome fantasia. Ex: Cantinho do Céu'
                       )}
                     </div>
                     <FormControl>
@@ -285,7 +266,7 @@ export function SecretariaForm() {
                     <div className="flex">
                       <FormLabel>CNPJ *</FormLabel>
                       {TooltipWithLabelForm(
-                        'Escreva o CNPJ da secretaria. Ex: 24.167.744/0001-61'
+                        'Informe o CNPJ da secretaria. Ex: 24.167.744/0001-61'
                       )}
                     </div>
                     <FormControl>
@@ -307,7 +288,7 @@ export function SecretariaForm() {
                     <div className="flex">
                       <FormLabel>Decreto *</FormLabel>
                       {TooltipWithLabelForm(
-                        'Escreva o nome ou as informações correspondente ao Decreto. Ex: 1564/1995'
+                        'Informe o nome ou as informações correspondente ao Decreto. Ex: 1564/1995'
                       )}
                     </div>
                     <FormControl>
@@ -325,7 +306,7 @@ export function SecretariaForm() {
                     <div className="flex">
                       <FormLabel>Natureza jurídica *</FormLabel>
                       {TooltipWithLabelForm(
-                        'Escreva o nome ou as informações relacionadas a Natureza Jurídica. Ex: Órgão Público do Poder Executivo Municipal'
+                        'Informe o nome ou as informações relacionadas a natureza jurídica. Ex: Órgão Público do Poder Executivo Municipal'
                       )}
                     </div>
                     <FormControl>
@@ -346,7 +327,7 @@ export function SecretariaForm() {
                     <div className="flex">
                       <FormLabel>Secretário(a) *</FormLabel>
                       {TooltipWithLabelForm(
-                        'Escreva o nome do Secretário(a). Ex: José Almeida'
+                        'Informe o nome do secretário(a). Ex: José Almeida'
                       )}
                     </div>
                     <FormControl>
@@ -367,7 +348,7 @@ export function SecretariaForm() {
                     <div className="flex">
                       <FormLabel>Prefeito *</FormLabel>
                       {TooltipWithLabelForm(
-                        'Escreva o nome do Prefeito a cidade. Ex: Matheus Josefino'
+                        'Informe o nome do prefeito a cidade. Ex: Matheus Josefino'
                       )}
                     </div>
                     <FormControl>
@@ -388,7 +369,7 @@ export function SecretariaForm() {
                     <div className="flex">
                       <FormLabel>Vinculado ao Ente Federativo *</FormLabel>
                       {TooltipWithLabelForm(
-                        'Escreva o Vinculado ao Ente Federativo. Ex: Prefeitura | Estado | Federal'
+                        'Informe o Vinculado ao Ente Federativo. Ex: Prefeitura | Estado | Federal'
                       )}
                     </div>
                     <FormControl>
@@ -415,10 +396,11 @@ export function SecretariaForm() {
                       </div>
                     </div>
                     <Popover>
-                      <PopoverTrigger onClick={() => null}>
+                      <PopoverTrigger>
                         <FormControl>
                           <Button
                             variant={'outline'}
+                            type="button"
                             className={cn(
                               'w-full pl-3 text-left font-normal',
                               !field.value && 'text-muted-foreground'
@@ -474,9 +456,13 @@ export function SecretariaForm() {
               control={form.control}
               name="endereco.cep"
               render={({ field }) => (
-                <FormItem className="col-span-2">
-                  <FormLabel>CEP *</FormLabel>
-                  {TooltipWithLabelForm('Escreva o nome da Razão Social.')}
+                <FormItem className="col-span-1">
+                  <div className="flex">
+                    <FormLabel>CEP *</FormLabel>
+                    {TooltipWithLabelForm(
+                      'Informe CEP do endereço Ex: 79588-225'
+                    )}
+                  </div>
                   <FormControl>
                     <Input placeholder="Razão Social" {...field} />
                   </FormControl>
@@ -489,8 +475,12 @@ export function SecretariaForm() {
               name="endereco.logradouro"
               render={({ field }) => (
                 <FormItem className="col-span-2">
-                  <FormLabel>Logradouro *</FormLabel>
-                  {TooltipWithLabelForm('Escreva o nome da Razão Social.')}
+                  <div className="flex">
+                    <FormLabel>Logradouro *</FormLabel>
+                    {TooltipWithLabelForm(
+                      'Informe as informação do lougradouro. Ex: Rua Rio Grande'
+                    )}
+                  </div>
                   <FormControl>
                     <Input
                       placeholder="Secretaria Municipal de Educação"
@@ -503,17 +493,35 @@ export function SecretariaForm() {
             />
             <FormField
               control={form.control}
+              name="endereco.numero"
+              render={({ field }) => (
+                <FormItem className="col-span-1">
+                  <div className="flex">
+                    <FormLabel>Número*</FormLabel>
+                    {TooltipWithLabelForm(
+                      'Informe o numero do edifício Ex: 8856'
+                    )}
+                  </div>
+                  <FormControl>
+                    <Input placeholder="1995" type="number" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
               name="endereco.bairro"
               render={({ field }) => (
                 <FormItem className="col-span-2">
-                  <FormLabel>Bairro *</FormLabel>
-                  {TooltipWithLabelForm('Escreva o nome da Razão Social.')}
+                  <div className="flex">
+                    <FormLabel>Bairro *</FormLabel>
+                    {TooltipWithLabelForm(
+                      'Informe o nome do Bairro Ex: Bairro Jardim Belo'
+                    )}
+                  </div>
                   <FormControl>
-                    <Input
-                      type="number"
-                      placeholder="24.167.744.0001-61"
-                      {...field}
-                    />
+                    <Input placeholder="Bairro Jardim Belo" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -524,8 +532,12 @@ export function SecretariaForm() {
               name="endereco.complemento"
               render={({ field }) => (
                 <FormItem className="col-span-2">
-                  <FormLabel>Complemento e Número *</FormLabel>
-                  {TooltipWithLabelForm('Escreva o nome da Razão Social.')}
+                  <div className="flex">
+                    <FormLabel>Complemento</FormLabel>
+                    {TooltipWithLabelForm(
+                      'Informe o completo. Ex: Tem uma arvore na frente e a cor do portão é verde.'
+                    )}
+                  </div>
                   <FormControl>
                     <Input placeholder="1564/1995" {...field} />
                   </FormControl>
@@ -538,9 +550,9 @@ export function SecretariaForm() {
               name="cidades"
               render={({ field }) => (
                 <FormItem className="max-w-250px flex w-full flex-col">
-                  <div>
+                  <div className="flex">
                     <FormLabel>Cidade</FormLabel>
-                    {TooltipWithLabelForm('Escreva o nome da Razão Social.')}
+                    {TooltipWithLabelForm('Informe o nome da Razão Social.')}
                   </div>
                   <Popover>
                     <PopoverTrigger asChild>
@@ -587,6 +599,7 @@ export function SecretariaForm() {
                                       : 'opacity-0'
                                   )}
                                 />
+                                {/* {item.name} */}
                                 <div className="flex flex-col">
                                   <span className="text-sm">{item.name}</span>
                                   <span className="text-xs">ID: {item.id}</span>
