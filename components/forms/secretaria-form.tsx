@@ -205,7 +205,7 @@ export function SecretariaForm() {
     return (
       <TooltipProvider delayDuration={100}>
         <Tooltip>
-          <TooltipTrigger>
+          <TooltipTrigger asChild>
             <span className="m-0 ml-2 flex h-4 w-4 items-center justify-center rounded-full bg-slate-400 p-0 text-xs font-normal text-white">
               ?
             </span>
