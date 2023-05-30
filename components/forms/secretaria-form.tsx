@@ -47,18 +47,6 @@ import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import * as z from 'zod'
 
-const languages = [
-  { label: 'English', value: 'en' },
-  { label: 'French', value: 'fr' },
-  { label: 'German', value: 'de' },
-  { label: 'Spanish', value: 'es' },
-  { label: 'Portuguese', value: 'pt' },
-  { label: 'Russian', value: 'ru' },
-  { label: 'Japanese', value: 'ja' },
-  { label: 'Korean', value: 'ko' },
-  { label: 'Chinese', value: 'zh' },
-] as const
-
 const secretariaFormSchema = z.object({
   cidades: z.string().min(2, {
     message: 'Erro cidades',
@@ -213,15 +201,17 @@ export function SecretariaForm() {
     )
   }
 
-  function TooltipWithLabelForm() {
+  function TooltipWithLabelForm(messageDescription: string) {
     return (
-      <TooltipProvider>
+      <TooltipProvider delayDuration={100}>
         <Tooltip>
           <TooltipTrigger>
-            <FormLabel>adsdasd</FormLabel>
+            <span className="m-0 ml-2 flex h-4 w-4 items-center justify-center rounded-full bg-slate-400 p-0 text-xs font-normal text-white">
+              ?
+            </span>
           </TooltipTrigger>
-          <TooltipContent>
-            <p>Add to library</p>
+          <TooltipContent side="top" className="mb-3">
+            <FormDescription>{messageDescription}</FormDescription>
           </TooltipContent>
         </Tooltip>
       </TooltipProvider>
@@ -241,202 +231,188 @@ export function SecretariaForm() {
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
-            className="mr-12 grid h-full w-full max-w-3xl grid-cols-4 gap-6"
+            className="flex h-full w-full flex-col justify-between gap-6"
           >
-            <FormField
-              control={form.control}
-              name="razaoSocial"
-              render={({ field }) => (
-                <FormItem className="col-span-2">
-                  <FormLabel>Razão Social *</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Razão Social" {...field} />
-                  </FormControl>
-                  {/* <FormDescription className="text-xs">
-                    Escreva o nome da Razão Social.
-                  </FormDescription> */}
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="nomeFantasia"
-              render={({ field }) => (
-                <FormItem className="col-span-2">
-                  <FormLabel>Nome Fantasia *</FormLabel>
-                  <FormControl>
-                    <Input
-                      placeholder="Secretaria Municipal de Educação"
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormDescription className="text-xs">
-                    Escreva o nome fantasia.
-                  </FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="cnpj"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>CNPJ *</FormLabel>
-                  <FormControl>
-                    <Input
-                      type="number"
-                      placeholder="24.167.744.0001-61"
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormDescription className="text-xs">
-                    Escreva o cnpj da secretaria.
-                  </FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="decreto"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Decreto *</FormLabel>
-                  <FormControl>
-                    <Input placeholder="1564/1995" {...field} />
-                  </FormControl>
-                  <FormDescription className="text-xs">
-                    Escreva as informações do decreto.
-                  </FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="vincEnteFederativo"
-              render={({ field }) => (
-                <FormItem className="col-span-2">
-                  <FormLabel>Natureza jurídica *</FormLabel>
-                  <FormControl>
-                    <Input
-                      placeholder="Órgão Público do Poder Executivo Municipal"
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormDescription className="text-xs">
-                    Informe a natureza jurídica.
-                  </FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="secretario"
-              render={({ field }) => (
-                <FormItem className="col-span-2">
-                  <FormLabel>Secretário(a) *</FormLabel>
-                  <FormControl>
-                    <Input
-                      placeholder="Secretaria Municipal de Educação"
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormDescription className="text-xs">
-                    Escreva o nome do Secretário(a) *
-                  </FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="prefeito"
-              render={({ field }) => (
-                <FormItem className="col-span-2">
-                  <FormLabel>Prefeito *</FormLabel>
-                  <FormControl>
-                    <Input
-                      placeholder="Secretaria Municipal de Educação"
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormDescription className="text-xs">
-                    Escreva o nome do Prefeito.
-                  </FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="vincEnteFederativo"
-              render={({ field }) => (
-                <FormItem className="col-span-2">
-                  <FormLabel>Vinculdo ao Ente Federativo *</FormLabel>
-                  <FormControl>
-                    <Input
-                      placeholder="Secretaria Municipal de Educação"
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormDescription className="text-xs">
-                    Escreva o Vinculdo ao Ente Federativo
-                  </FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="dataCriacao"
-              render={({ field }) => (
-                <FormItem className="col-span-2 flex max-w-[220px] flex-col">
-                  <FormLabel>Data de criação</FormLabel>
-                  <Popover>
-                    <PopoverTrigger asChild>
-                      <FormControl>
-                        <Button
-                          variant={'outline'}
-                          className={cn(
-                            'pl-3 text-left font-normal',
-                            !field.value && 'text-muted-foreground'
-                          )}
-                        >
-                          {field.value ? (
-                            format(field.value, 'PPP', { locale: ptBR })
-                          ) : (
-                            <span>Selecione uma Data</span>
-                          )}
-                          <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
-                        </Button>
-                      </FormControl>
-                    </PopoverTrigger>
-                    <PopoverContent className="w-auto p-0" align="start">
-                      <Calendar
-                        mode="single"
-                        selected={field.value}
-                        onSelect={field.onChange}
-                        disabled={(date) =>
-                          date > new Date() || date < new Date('1900-01-01')
-                        }
-                        initialFocus
+            <div className="mr-12 grid max-w-3xl grid-cols-4 gap-6">
+              <FormField
+                control={form.control}
+                name="razaoSocial"
+                render={({ field }) => (
+                  <FormItem className="col-span-2">
+                    <FormLabel>Razão Social *</FormLabel>
+                    {TooltipWithLabelForm('Escreva o nome da Razão Social.')}
+                    <FormControl>
+                      <Input placeholder="Razão Social" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="nomeFantasia"
+                render={({ field }) => (
+                  <FormItem className="col-span-2">
+                    <FormLabel>Nome Fantasia *</FormLabel>
+                    {TooltipWithLabelForm('Escreva o nome da Razão Social.')}
+                    <FormControl>
+                      <Input
+                        placeholder="Secretaria Municipal de Educação"
+                        {...field}
                       />
-                    </PopoverContent>
-                  </Popover>
-                  <FormDescription>
-                    Selecione a data de criação da secretaria.
-                  </FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="cnpj"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>CNPJ *</FormLabel>
+                    {TooltipWithLabelForm('Escreva o nome da Razão Social.')}
+                    <FormControl>
+                      <Input
+                        type="number"
+                        placeholder="24.167.744.0001-61"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="decreto"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Decreto *</FormLabel>
+                    {TooltipWithLabelForm('Escreva o nome da Razão Social.')}
+                    <FormControl>
+                      <Input placeholder="1564/1995" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="vincEnteFederativo"
+                render={({ field }) => (
+                  <FormItem className="col-span-2">
+                    <FormLabel>Natureza jurídica *</FormLabel>
+                    {TooltipWithLabelForm('Escreva o nome da Razão Social.')}
+                    <FormControl>
+                      <Input
+                        placeholder="Órgão Público do Poder Executivo Municipal"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="secretario"
+                render={({ field }) => (
+                  <FormItem className="col-span-2">
+                    <FormLabel>Secretário(a) *</FormLabel>
+                    {TooltipWithLabelForm('Escreva o nome da Razão Social.')}
+                    <FormControl>
+                      <Input
+                        placeholder="Secretaria Municipal de Educação"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="prefeito"
+                render={({ field }) => (
+                  <FormItem className="col-span-2">
+                    <FormLabel>Prefeito *</FormLabel>
+                    {TooltipWithLabelForm('Escreva o nome da Razão Social.')}
+                    <FormControl>
+                      <Input
+                        placeholder="Secretaria Municipal de Educação"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="vincEnteFederativo"
+                render={({ field }) => (
+                  <FormItem className="col-span-2">
+                    <FormLabel>Vinculdo ao Ente Federativo *</FormLabel>
+                    {TooltipWithLabelForm('Escreva o nome da Razão Social.')}
+                    <FormControl>
+                      <Input
+                        placeholder="Secretaria Municipal de Educação"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="dataCriacao"
+                render={({ field }) => (
+                  <FormItem className="col-span-2 flex max-w-[220px] flex-col">
+                    <div>
+                      <FormLabel>Data de criação</FormLabel>
+                      {TooltipWithLabelForm('Escreva o nome da Razão Social.')}
+                    </div>
+                    <Popover>
+                      <PopoverTrigger onClick={() => null}>
+                        <FormControl>
+                          <Button
+                            variant={'outline'}
+                            className={cn(
+                              'pl-3 text-left font-normal',
+                              !field.value && 'text-muted-foreground'
+                            )}
+                          >
+                            {field.value ? (
+                              format(field.value, 'PPP', { locale: ptBR })
+                            ) : (
+                              <span>Selecione uma Data</span>
+                            )}
+                            <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                          </Button>
+                        </FormControl>
+                      </PopoverTrigger>
+                      <PopoverContent className="w-auto p-0" align="start">
+                        <Calendar
+                          mode="single"
+                          selected={field.value}
+                          onSelect={field.onChange}
+                          disabled={(date) =>
+                            date > new Date() || date < new Date('1900-01-01')
+                          }
+                          initialFocus
+                        />
+                      </PopoverContent>
+                    </Popover>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
 
             <Button
-              className="col-start-4 col-end-5 flex h-12 w-min flex-row items-center justify-center gap-2 justify-self-end bg-slate-100 hover:bg-slate-100/50"
+              className="col-start-4 col-end-5 mr-12 flex h-12 w-min flex-row justify-center gap-2 self-end justify-self-end hover:bg-slate-100"
               variant="ghost"
               onClick={() => setValueTabs('address')}
             >
@@ -460,12 +436,10 @@ export function SecretariaForm() {
               render={({ field }) => (
                 <FormItem className="col-span-2">
                   <FormLabel>CEP *</FormLabel>
+                  {TooltipWithLabelForm('Escreva o nome da Razão Social.')}
                   <FormControl>
                     <Input placeholder="Razão Social" {...field} />
                   </FormControl>
-                  {/* <FormDescription className="text-xs">
-                    Escreva o nome da Razão Social.
-                  </FormDescription> */}
                   <FormMessage />
                 </FormItem>
               )}
@@ -476,15 +450,13 @@ export function SecretariaForm() {
               render={({ field }) => (
                 <FormItem className="col-span-2">
                   <FormLabel>Logradouro *</FormLabel>
+                  {TooltipWithLabelForm('Escreva o nome da Razão Social.')}
                   <FormControl>
                     <Input
                       placeholder="Secretaria Municipal de Educação"
                       {...field}
                     />
                   </FormControl>
-                  <FormDescription className="text-xs">
-                    Escreva o nome fantasia.
-                  </FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
@@ -495,6 +467,7 @@ export function SecretariaForm() {
               render={({ field }) => (
                 <FormItem className="col-span-2">
                   <FormLabel>Bairro *</FormLabel>
+                  {TooltipWithLabelForm('Escreva o nome da Razão Social.')}
                   <FormControl>
                     <Input
                       type="number"
@@ -502,9 +475,6 @@ export function SecretariaForm() {
                       {...field}
                     />
                   </FormControl>
-                  <FormDescription className="text-xs">
-                    Escreva o cnpj da secretaria.
-                  </FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
@@ -515,12 +485,10 @@ export function SecretariaForm() {
               render={({ field }) => (
                 <FormItem className="col-span-2">
                   <FormLabel>Complemento e Número *</FormLabel>
+                  {TooltipWithLabelForm('Escreva o nome da Razão Social.')}
                   <FormControl>
                     <Input placeholder="1564/1995" {...field} />
                   </FormControl>
-                  <FormDescription className="text-xs">
-                    Escreva as informações do decreto.
-                  </FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
@@ -530,7 +498,10 @@ export function SecretariaForm() {
               name="cidades"
               render={({ field }) => (
                 <FormItem className="max-w-250px flex w-full flex-col">
-                  <FormLabel>Cidade</FormLabel>
+                  <div>
+                    <FormLabel>Cidade</FormLabel>
+                    {TooltipWithLabelForm('Escreva o nome da Razão Social.')}
+                  </div>
                   <Popover>
                     <PopoverTrigger asChild>
                       <FormControl>
@@ -547,7 +518,7 @@ export function SecretariaForm() {
                               ? listCidades!.find(
                                   (item) => item.id === field.value
                                 )?.name
-                              : 'Select language'}
+                              : 'Seleciona a cidade'}
                           </span>
                           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                         </Button>
@@ -555,7 +526,7 @@ export function SecretariaForm() {
                     </PopoverTrigger>
                     <PopoverContent className="w-[250px] p-0">
                       <Command>
-                        <CommandInput placeholder="Search language..." />
+                        <CommandInput placeholder="Pesquise a cidade..." />
                         <CommandEmpty>Cidade não encontrada.</CommandEmpty>
                         <CommandGroup>
                           <ScrollArea className="h-[300px]">
@@ -584,9 +555,6 @@ export function SecretariaForm() {
                       </Command>
                     </PopoverContent>
                   </Popover>
-                  <FormDescription>
-                    This is the language that will be used in the dashboard.
-                  </FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
