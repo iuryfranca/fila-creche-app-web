@@ -216,15 +216,15 @@ export function SecretariaForm() {
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
-            className="flex h-full w-full flex-col justify-between gap-6"
+            className="flex h-full max-w-4xl flex-col justify-between gap-6"
           >
-            <div className="mr-12 grid max-w-3xl grid-cols-4 gap-6">
+            <div className="grid grid-cols-4 gap-6">
               <FormField
                 control={form.control}
                 name="razaoSocial"
                 render={({ field }) => (
                   <FormItem className="col-span-2">
-                    <div className="flex">
+                    <div className="flex items-center">
                       <FormLabel>Razão Social *</FormLabel>
                       {TooltipWithLabelForm(
                         'Informe o nome da razão social. Ex: Secretaria Municipal de Educação Rondônia'
@@ -242,7 +242,7 @@ export function SecretariaForm() {
                 name="nomeFantasia"
                 render={({ field }) => (
                   <FormItem className="col-span-2">
-                    <div className="flex">
+                    <div className="flex items-center">
                       <FormLabel>Nome Fantasia *</FormLabel>
                       {TooltipWithLabelForm(
                         'Informe o nome fantasia. Ex: Cantinho do Céu'
@@ -263,7 +263,7 @@ export function SecretariaForm() {
                 name="cnpj"
                 render={({ field }) => (
                   <FormItem>
-                    <div className="flex">
+                    <div className="flex items-center">
                       <FormLabel>CNPJ *</FormLabel>
                       {TooltipWithLabelForm(
                         'Informe o CNPJ da secretaria. Ex: 24.167.744/0001-61'
@@ -285,7 +285,7 @@ export function SecretariaForm() {
                 name="decreto"
                 render={({ field }) => (
                   <FormItem>
-                    <div className="flex">
+                    <div className="flex items-center">
                       <FormLabel>Decreto *</FormLabel>
                       {TooltipWithLabelForm(
                         'Informe o nome ou as informações correspondente ao Decreto. Ex: 1564/1995'
@@ -303,7 +303,7 @@ export function SecretariaForm() {
                 name="vincEnteFederativo"
                 render={({ field }) => (
                   <FormItem className="col-span-2">
-                    <div className="flex">
+                    <div className="flex items-center">
                       <FormLabel>Natureza jurídica *</FormLabel>
                       {TooltipWithLabelForm(
                         'Informe o nome ou as informações relacionadas a natureza jurídica. Ex: Órgão Público do Poder Executivo Municipal'
@@ -324,7 +324,7 @@ export function SecretariaForm() {
                 name="secretario"
                 render={({ field }) => (
                   <FormItem className="col-span-2">
-                    <div className="flex">
+                    <div className="flex items-center">
                       <FormLabel>Secretário(a) *</FormLabel>
                       {TooltipWithLabelForm(
                         'Informe o nome do secretário(a). Ex: José Almeida'
@@ -345,7 +345,7 @@ export function SecretariaForm() {
                 name="prefeito"
                 render={({ field }) => (
                   <FormItem className="col-span-2">
-                    <div className="flex">
+                    <div className="flex items-center">
                       <FormLabel>Prefeito *</FormLabel>
                       {TooltipWithLabelForm(
                         'Informe o nome do prefeito a cidade. Ex: Matheus Josefino'
@@ -366,7 +366,7 @@ export function SecretariaForm() {
                 name="vincEnteFederativo"
                 render={({ field }) => (
                   <FormItem className="col-span-2">
-                    <div className="flex">
+                    <div className="flex items-center">
                       <FormLabel>Vinculado ao Ente Federativo *</FormLabel>
                       {TooltipWithLabelForm(
                         'Informe o Vinculado ao Ente Federativo. Ex: Prefeitura | Estado | Federal'
@@ -388,7 +388,7 @@ export function SecretariaForm() {
                 render={({ field }) => (
                   <FormItem className="col-span-2 flex max-w-[220px] flex-col">
                     <div>
-                      <div className="flex">
+                      <div className="flex items-center">
                         <FormLabel>Data de criação</FormLabel>
                         {TooltipWithLabelForm(
                           'Selecione a data de criação da secretaria.'
@@ -434,7 +434,7 @@ export function SecretariaForm() {
             </div>
 
             <Button
-              className="col-start-4 col-end-5 mr-12 flex h-12 w-min flex-row justify-center gap-2 self-end justify-self-end hover:bg-slate-100"
+              className="col-start-4 col-end-5 flex h-12 w-min flex-row justify-center gap-2 self-end justify-self-end hover:bg-slate-100/50"
               variant="ghost"
               onClick={() => setValueTabs('address')}
             >
@@ -450,176 +450,179 @@ export function SecretariaForm() {
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
-            className="mr-12 grid w-full max-w-3xl grid-cols-4 gap-6"
+            className="flex h-full max-w-4xl flex-col justify-between gap-6"
           >
-            <FormField
-              control={form.control}
-              name="endereco.cep"
-              render={({ field }) => (
-                <FormItem className="col-span-1">
-                  <div className="flex">
-                    <FormLabel>CEP *</FormLabel>
-                    {TooltipWithLabelForm(
-                      'Informe CEP do endereço Ex: 79588-225'
-                    )}
-                  </div>
-                  <FormControl>
-                    <Input placeholder="Razão Social" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="endereco.logradouro"
-              render={({ field }) => (
-                <FormItem className="col-span-2">
-                  <div className="flex">
-                    <FormLabel>Logradouro *</FormLabel>
-                    {TooltipWithLabelForm(
-                      'Informe as informação do lougradouro. Ex: Rua Rio Grande'
-                    )}
-                  </div>
-                  <FormControl>
-                    <Input
-                      placeholder="Secretaria Municipal de Educação"
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="endereco.numero"
-              render={({ field }) => (
-                <FormItem className="col-span-1">
-                  <div className="flex">
-                    <FormLabel>Número*</FormLabel>
-                    {TooltipWithLabelForm(
-                      'Informe o numero do edifício Ex: 8856'
-                    )}
-                  </div>
-                  <FormControl>
-                    <Input placeholder="1995" type="number" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="endereco.bairro"
-              render={({ field }) => (
-                <FormItem className="col-span-2">
-                  <div className="flex">
-                    <FormLabel>Bairro *</FormLabel>
-                    {TooltipWithLabelForm(
-                      'Informe o nome do Bairro Ex: Bairro Jardim Belo'
-                    )}
-                  </div>
-                  <FormControl>
-                    <Input placeholder="Bairro Jardim Belo" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="endereco.complemento"
-              render={({ field }) => (
-                <FormItem className="col-span-2">
-                  <div className="flex">
-                    <FormLabel>Complemento</FormLabel>
-                    {TooltipWithLabelForm(
-                      'Informe o completo. Ex: Tem uma arvore na frente e a cor do portão é verde.'
-                    )}
-                  </div>
-                  <FormControl>
-                    <Input placeholder="1564/1995" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="cidades"
-              render={({ field }) => (
-                <FormItem className="max-w-250px flex w-full flex-col">
-                  <div className="flex">
-                    <FormLabel>Cidade</FormLabel>
-                    {TooltipWithLabelForm('Informe o nome da Razão Social.')}
-                  </div>
-                  <Popover>
-                    <PopoverTrigger asChild>
-                      <FormControl>
-                        <Button
-                          variant="outline"
-                          role="combobox"
-                          className={cn(
-                            'h-12 w-[250px] justify-between p-2 pl-4',
-                            !field.value && 'text-muted-foreground'
-                          )}
-                        >
-                          <span className="text-start">
-                            {field.value
-                              ? listCidades!.find(
-                                  (item) => item.id === field.value
-                                )?.name
-                              : 'Seleciona a cidade'}
-                          </span>
-                          <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
-                        </Button>
-                      </FormControl>
-                    </PopoverTrigger>
-                    <PopoverContent className="w-[250px] p-0">
-                      <Command>
-                        <CommandInput placeholder="Pesquise a cidade..." />
-                        <CommandEmpty>Cidade não encontrada.</CommandEmpty>
-                        <CommandGroup>
-                          <ScrollArea className="h-[300px]">
-                            {listCidades!.map((item) => (
-                              <CommandItem
-                                value={item.id}
-                                key={item.id}
-                                onSelect={(value) => {
-                                  console.log('value', item.id)
-                                  form.setValue('cidades', item.id)
-                                }}
-                              >
-                                <Check
-                                  className={cn(
-                                    'mr-2 h-4 w-4',
-                                    item.id === field.value
-                                      ? 'opacity-100'
-                                      : 'opacity-0'
-                                  )}
-                                />
-                                {/* {item.name} */}
-                                <div className="flex flex-col">
-                                  <span className="text-sm">{item.name}</span>
-                                  <span className="text-xs">ID: {item.id}</span>
-                                </div>
-                              </CommandItem>
-                            ))}
-                          </ScrollArea>
-                        </CommandGroup>
-                      </Command>
-                    </PopoverContent>
-                  </Popover>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+            <div className="grid grid-cols-4 gap-6">
+              <FormField
+                control={form.control}
+                name="endereco.cep"
+                render={({ field }) => (
+                  <FormItem className="col-span-1">
+                    <div className="flex items-center">
+                      <FormLabel>CEP *</FormLabel>
+                      {TooltipWithLabelForm(
+                        'Informe CEP do endereço Ex: 79588-225'
+                      )}
+                    </div>
+                    <FormControl>
+                      <Input placeholder="Razão Social" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="endereco.logradouro"
+                render={({ field }) => (
+                  <FormItem className="col-span-2">
+                    <div className="flex items-center">
+                      <FormLabel>Logradouro *</FormLabel>
+                      {TooltipWithLabelForm(
+                        'Informe as informação do lougradouro. Ex: Rua Rio Grande'
+                      )}
+                    </div>
+                    <FormControl>
+                      <Input
+                        placeholder="Secretaria Municipal de Educação"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="endereco.numero"
+                render={({ field }) => (
+                  <FormItem className="col-span-1">
+                    <div className="flex items-center">
+                      <FormLabel>Número*</FormLabel>
+                      {TooltipWithLabelForm(
+                        'Informe o numero do edifício Ex: 8856'
+                      )}
+                    </div>
+                    <FormControl>
+                      <Input placeholder="1995" type="number" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="endereco.bairro"
+                render={({ field }) => (
+                  <FormItem className="col-span-2">
+                    <div className="flex items-center">
+                      <FormLabel>Bairro *</FormLabel>
+                      {TooltipWithLabelForm(
+                        'Informe o nome do Bairro Ex: Bairro Jardim Belo'
+                      )}
+                    </div>
+                    <FormControl>
+                      <Input placeholder="Bairro Jardim Belo" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="endereco.complemento"
+                render={({ field }) => (
+                  <FormItem className="col-span-2">
+                    <div className="flex items-center">
+                      <FormLabel>Complemento</FormLabel>
+                      {TooltipWithLabelForm(
+                        'Informe o completo. Ex: Tem uma arvore na frente e a cor do portão é verde.'
+                      )}
+                    </div>
+                    <FormControl>
+                      <Input placeholder="1564/1995" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="cidades"
+                render={({ field }) => (
+                  <FormItem className="max-w-250px flex w-full flex-col">
+                    <div className="flex items-center">
+                      <FormLabel>Cidade</FormLabel>
+                      {TooltipWithLabelForm('Informe o nome da Razão Social.')}
+                    </div>
+                    <Popover>
+                      <PopoverTrigger asChild>
+                        <FormControl>
+                          <Button
+                            variant="outline"
+                            role="combobox"
+                            className={cn(
+                              'h-12 w-[250px] justify-between p-2 pl-4',
+                              !field.value && 'text-muted-foreground'
+                            )}
+                          >
+                            <span className="text-start">
+                              {field.value
+                                ? listCidades!.find(
+                                    (item) => item.id === field.value
+                                  )?.name
+                                : 'Seleciona a cidade'}
+                            </span>
+                            <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                          </Button>
+                        </FormControl>
+                      </PopoverTrigger>
+                      <PopoverContent className="w-[250px] p-0">
+                        <Command>
+                          <CommandInput placeholder="Pesquise a cidade..." />
+                          <CommandEmpty>Cidade não encontrada.</CommandEmpty>
+                          <CommandGroup>
+                            <ScrollArea className="h-[300px]">
+                              {listCidades!.map((item) => (
+                                <CommandItem
+                                  value={item.id}
+                                  key={item.id}
+                                  onSelect={(value) => {
+                                    form.setValue('cidades', item.id)
+                                  }}
+                                >
+                                  <Check
+                                    className={cn(
+                                      'mr-2 h-4 w-4',
+                                      item.id === field.value
+                                        ? 'opacity-100'
+                                        : 'opacity-0'
+                                    )}
+                                  />
+                                  {/* {item.name} */}
+                                  <div className="flex flex-col">
+                                    <span className="text-sm">{item.name}</span>
+                                    <span className="text-xs">
+                                      ID: {item.id}
+                                    </span>
+                                  </div>
+                                </CommandItem>
+                              ))}
+                            </ScrollArea>
+                          </CommandGroup>
+                        </Command>
+                      </PopoverContent>
+                    </Popover>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
 
             <Button
-              className="col-start-4 col-end-5 flex h-12 w-min flex-row justify-center gap-2 self-end justify-self-end bg-slate-100 hover:bg-slate-100/50"
+              className="col-start-4 col-end-5 flex h-12 w-min flex-row justify-center gap-2 self-end justify-self-end hover:bg-slate-100/50"
               variant="ghost"
-              onClick={() => setValueTabs('address')}
+              onClick={() => setValueTabs('contacts')}
             >
               Próximo
               <div className="flex h-7 w-7 items-center justify-center rounded-full bg-primary text-primary-foreground transition-all duration-300">
