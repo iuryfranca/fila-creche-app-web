@@ -216,6 +216,7 @@ export function SecretariaForm() {
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
+            autoComplete="off"
             className="flex h-full max-w-4xl flex-col justify-between gap-6"
           >
             <div className="grid grid-cols-4 gap-6">
